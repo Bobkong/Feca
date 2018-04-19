@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="eye_red_bean_0">#deae98</color>
+    <color name="eye_red_bean_1">#dc908b</color>
+    <color name="eye_red_bean_2">#d07e78</color>
+    <color name="eye_red_bean_3">#dec1ae</color>
+
+    <color name="eye_red_0">#a35561</color>
+    <color name="eye_red_1">#774443</color>
+    <color name="eye_red_2">#4e3531</color>
+    <color name="eye_red_3">#d3b7b3</color>
+
+    <color name="eye_orange_brown_0">#d58051</color>
+    <color name="eye_orange_brown_1">#c26049</color>
+    <color name="eye_orange_brown_2">#c26049</color>
+    <color name="eye_orange_brown_3">#ebb88d</color>
+
+    <color name="eye_orange_0">#e48f64</color>
+    <color name="eye_orange_1">#ae8978</color>
+    <color name="eye_orange_2">#e48f64</color>
+    <color name="eye_orange_3">#f1e3cb</color>
+
+
+    <string name="eye_red_bean">豆沙色系</string>
+    <string name="eye_red">红色系</string>
+    <string name="eye_orange_brown">橘色系</string>
+    <string name="eye_orange">大地色系</string>
+
+
+    <array name="eye_colors">
+        <item>@color/eye_red_bean_0</item>
+        <item>@color/eye_red_bean_1</item>
+        <item>@color/eye_red_bean_2</item>
+
+        <item>@color/eye_red_0</item>
+        <item>@color/eye_red_1</item>
+        <item>@color/eye_red_2</item>
+
+        <item>@color/eye_orange_brown_0</item>
+        <item>@color/eye_orange_brown_1</item>
+        <item>@color/eye_orange_brown_2</item>
+
+        <item>@color/eye_orange_0</item>
+        <item>@color/eye_orange_1</item>
+        <item>@color/eye_orange_2</item>
+        <item>@color/eye_orange_3</item>
+    </array>
+
+    <array name="eye_color_logo">
+        <item>@color/eye_red_bean_0</item>
+        <item>@color/eye_red_0</item>
+        <item>@color/eye_orange_brown_0</item>
+        <item>@color/eye_orange_1</item>
+    </array>
+
+    <array name="eye_names">
+        <item>@string/eye_red_bean</item>
+        <item>@string/eye_red</item>
+        <item>@string/eye_orange_brown</item>
+        <item>@string/eye_orange</item>
+    </array>
+
+</resources>

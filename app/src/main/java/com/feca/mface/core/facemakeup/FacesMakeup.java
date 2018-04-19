@@ -1,6 +1,7 @@
 package com.feca.mface.core.facemakeup;
 
 import android.graphics.Bitmap;
+import android.os.Binder;
 
 import com.feca.mface.core.facedetection.DetectedFaces;
 
@@ -44,5 +45,9 @@ public class FacesMakeup {
 
     public Bitmap getOriginalFace() {
         return mOriginalFace;
+    }
+
+    public void setmOriginalFace(Bitmap newOriginalFace){
+        mOriginalFace = newOriginalFace;
     }
 }

@@ -31,4 +31,5 @@
     <string name="no_permission">没有权限！</string>
     <string name="developing">本功能正在开发中..</string>
     <string name="detail">详情</string>
+    <string name="detect_error">未能检测出人脸，请确认照片中是否包含人脸</string>
 </resources>
