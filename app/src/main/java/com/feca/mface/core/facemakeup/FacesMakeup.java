@@ -20,6 +20,10 @@ public class FacesMakeup {
         mDetectedFaces = detectedFaces;
     }
 
+    public boolean isFaceDetected() {
+        return mDetectedFaces.face_shape.length > 0;
+    }
+
     public void makeup(FaceMakeup makeup) {
         ensureMadeUpFace();
         for (int i = 0; i < mDetectedFaces.face_shape.length; i++) {
@@ -47,7 +51,7 @@ public class FacesMakeup {
         return mOriginalFace;
     }
 
-    public void setmOriginalFace(Bitmap newOriginalFace){
+    public void setmOriginalFace(Bitmap newOriginalFace) {
         mOriginalFace = newOriginalFace;
     }
 }
