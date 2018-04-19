@@ -82,6 +82,8 @@ public class MakeupActivity extends AppCompatActivity {
 
     private Bitmap nowPhoto;
     private Bitmap originPhoto;
+    private Bitmap onlyEye;
+    private Bitmap onlyLip;
 
     private LipstickViewHolder mSelectedLipstickHolder;
     private EyeViewHolder mSelectedEyeHolder;
@@ -177,8 +179,9 @@ public class MakeupActivity extends AppCompatActivity {
                 .map(new Function<Integer[], Bitmap>() {
                     @Override
                     public Bitmap apply(@NonNull Integer[] color) throws Exception {
-                        if (ifEyeMade)
+                        if (ifEyeMade){
                             mFacesMakeup.setmOriginalFace(originPhoto);
+                        }
                         if (which_lipstick == 8)
                             mFacesMakeup.reset();
                         mFacesMakeup.makeup(new Eyestick(color[2], color[3]));
@@ -208,7 +211,7 @@ public class MakeupActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
-    private void onLipstickColorSelected(LipstickViewHolder holder, int position) {
+    private void onLipstickColorSelected(LipstickViewHolder holder, final int position) {
         if (mSelectedLipstickHolder != null) {
             mSelectedLipstickHolder.mLipstickColor.setImageDrawable(null);
         }
@@ -219,15 +222,13 @@ public class MakeupActivity extends AppCompatActivity {
                 .map(new Function<Integer, Bitmap>() {
                     @Override
                     public Bitmap apply(@NonNull Integer color) throws Exception {
-<<<<<<< HEAD
-                        if (ifLipMade)
+                        if (ifEyeMade){
                             mFacesMakeup.setmOriginalFace(originPhoto);
+                        }
                         if (which_lipstick >= 0 && which_lipstick <=7)
-=======
-                        if (which_lipstick >= 0 && which_lipstick <= 7)
->>>>>>> f4e778a647dc3549f3c53003702070be25a21332
                             mFacesMakeup.reset();
                         mFacesMakeup.makeup(new Lipstick(color));
+                        which_lipstick = position;
                         return mFacesMakeup.getMadeUpFace();
                     }
                 })
@@ -289,16 +290,19 @@ public class MakeupActivity extends AppCompatActivity {
     }
 
     private void exitMakeupMode() {
+
         mBottomBar.setVisibility(View.GONE);
         mBottomList.setAdapter(mMakeupModeAdapter);
     }
 
     @Click(R.id.done)
     void completeMakeup() {
-        if (which_lipstick == 8)
+        if (which_lipstick == 8){
             ifEyeMade = true;
-        else if(which_lipstick >= 0 && which_lipstick <= 7)
+        }
+        else if(which_lipstick >= 0 && which_lipstick <= 7){
             ifLipMade = true;
+        }
         mFacesMakeup.setmOriginalFace(nowPhoto);
         exitMakeupMode();
     }

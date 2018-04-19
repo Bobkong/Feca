@@ -1,5 +1,6 @@
 package com.feca.mface.core.facemakeup;
 
+import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
@@ -10,6 +11,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 
 import com.feca.mface.core.facedetection.DetectedFaces;
@@ -35,6 +37,7 @@ public class Eyestick implements FaceMakeup {
 
 
     // @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void makeup(Bitmap image, DetectedFaces.FaceShapeItem face) {
         //Path mouthBounds = Paths.toPolygon(face.mouth);
@@ -86,7 +89,7 @@ public class Eyestick implements FaceMakeup {
         ColorDetector lipDetector = new ColorDetector.WeightedRGBDistanceDetector(lipAverageColor, LIPSTICK_DETECTING_THRESHOLD);
         Canvas canvas = new Canvas(image);
         Paint p = new Paint();
-        p.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.OVERLAY));
+        //p.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.OVERLAY));
         p.setColor(mUpColor);
 
         for (int y = bounds.top; y < bounds.bottom; y++) {
