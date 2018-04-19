@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -74,10 +73,13 @@ public class MakeupActivity extends AppCompatActivity {
     View mBottomBar;
 
     private int which_lipstick = -1;
+    private boolean ifEyeMade = false;
+    private boolean ifLipMade = false;
 
     TypedArray colors;
 
     private Bitmap nowPhoto;
+    private Bitmap originPhoto;
 
     private LipstickViewHolder mSelectedLipstickHolder;
     private EyeViewHolder mSelectedEyeHolder;
@@ -114,6 +116,7 @@ public class MakeupActivity extends AppCompatActivity {
                         mFacesMakeup = o;
                         mPhoto.setImageBitmap(o.getOriginalFace());
                         nowPhoto = o.getOriginalFace();
+                        originPhoto = o.getOriginalFace();
                     }
                 });
 
@@ -171,6 +174,8 @@ public class MakeupActivity extends AppCompatActivity {
                 .map(new Function<Integer[], Bitmap>() {
                     @Override
                     public Bitmap apply(@NonNull Integer[] color) throws Exception {
+                        if (ifEyeMade)
+                            mFacesMakeup.setmOriginalFace(originPhoto);
                         if (which_lipstick == 8)
                             mFacesMakeup.reset();
                         mFacesMakeup.makeup(new Eyestick(color[2],color[3]));
@@ -211,6 +216,8 @@ public class MakeupActivity extends AppCompatActivity {
                 .map(new Function<Integer, Bitmap>() {
                     @Override
                     public Bitmap apply(@NonNull Integer color) throws Exception {
+                        if (ifLipMade)
+                            mFacesMakeup.setmOriginalFace(originPhoto);
                         if (which_lipstick >= 0 && which_lipstick <=7)
                             mFacesMakeup.reset();
                         mFacesMakeup.makeup(new Lipstick(color));
@@ -278,6 +285,10 @@ public class MakeupActivity extends AppCompatActivity {
 
     @Click(R.id.done)
     void completeMakeup() {
+        if (which_lipstick == 8)
+            ifEyeMade = true;
+        else if(which_lipstick >= 0 && which_lipstick <= 7)
+            ifLipMade = true;
         mFacesMakeup.setmOriginalFace(nowPhoto);
         exitMakeupMode();
     }

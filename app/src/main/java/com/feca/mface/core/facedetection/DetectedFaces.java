@@ -91,38 +91,35 @@ public class DetectedFaces {
             return rightEye;
         }
 
-        public Point[] getRightLowerEye(){
-            int[] indices = {0, 1, 2, 3, 4, 5, 6, 7};
+        public Point[] getRightLowerEye() {
+            int[] indices = {0, 1, 2};
             Point[] rightEye = new Point[indices.length];
-            for(int i = 0; i < indices.length; i++){
-                rightEye[i] = right_eye[indices[i]];
-            }
-            Point right_zero = new Point(right_eye[0].x + (right_eye[0].x - right_eye[1].x),right_eye[0].y);
-            Point right_five = new Point(right_eye[1].x,right_eye[1].y + (right_eye[1].y - right_eye[7].y)/4);
-            Point right_six = new Point(right_eye[2].x,right_eye[2].y + (right_eye[2].y - right_eye[6].y)/4);
-            Point right_seven = new Point(right_eye[3].x,right_eye[3].y + (right_eye[3].y - right_eye[5].y)/4);
-            rightEye[0] = right_zero;
-            rightEye[5] = right_five;
-            rightEye[6] = right_six;
-            rightEye[7] = right_seven;
+            Point right_zero = new Point(right_eye[0].x + (right_eye[0].x - right_eye[1].x), right_eye[0].y);
+            Point right_five = new Point(right_eye[1].x, right_eye[1].y + (right_eye[1].y - right_eye[7].y) / 4);
+            /*Point right_six = new Point(right_eye[2].x,right_eye[2].y + (right_eye[2].y - right_eye[6].y)/4);
+            Point right_seven = new Point(right_eye[3].x,right_eye[3].y + (right_eye[3].y - right_eye[5].y)/4);*/
+                rightEye[0] = right_zero;
+                rightEye[1] = right_five;
+                rightEye[2] = right_eye[0];
+            /*rightEye[6] = right_six;
+            rightEye[7] = right_seven;*/
 
-            return rightEye;
+                return rightEye;
+
         }
 
         public Point[] getLeftLowerEye(){
-            int[] indices = {0, 1, 2, 3, 4, 5, 6, 7};
+            int[] indices = {0, 1, 2};
             Point[] leftEye = new Point[indices.length];
-            for(int i = 0; i < indices.length; i++){
-                leftEye[i] = left_eye[indices[i]];
-            }
             Point left_zero = new Point(left_eye[0].x - (left_eye[1].x - left_eye[0].x),left_eye[0].y);
             Point left_five = new Point(left_eye[1].x,left_eye[1].y + (left_eye[1].y - left_eye[7].y)/4);
-            Point left_six = new Point(left_eye[2].x,left_eye[2].y + (left_eye[2].y - left_eye[6].y)/4);
-            Point left_seven = new Point(left_eye[3].x,left_eye[3].y + (left_eye[3].y - left_eye[5].y)/4);
+           /* Point left_six = new Point(left_eye[2].x,left_eye[2].y + (left_eye[2].y - left_eye[6].y)/4);
+            Point left_seven = new Point(left_eye[3].x,left_eye[3].y + (left_eye[3].y - left_eye[5].y)/4);*/
             leftEye[0] = left_zero;
-            leftEye[5] = left_five;
-            leftEye[6] = left_six;
-            leftEye[7] = left_seven;
+            leftEye[1] = left_five;
+            leftEye[2] = left_eye[0];
+            /*leftEye[6] = left_six;
+            leftEye[7] = left_seven;*/
 
             return leftEye;
         }

@@ -27,8 +27,8 @@ public class Eyestick implements FaceMakeup {
     private int left_radius;
 
     public Eyestick(int upcolor,int lowColor) {
-        int newUpcolor = 0X25000000 + upcolor;
-        int newLowcolor = 0X20000000 + lowColor;
+        int newUpcolor = 0X20000000 + upcolor;
+        int newLowcolor = 0X15000000 + lowColor;
         mUpColor = newUpcolor;
         mLowColor = newLowcolor;
     }
@@ -54,6 +54,7 @@ public class Eyestick implements FaceMakeup {
         }
         canvas.drawPath(Paths.toCatmullRomCurve(face.getLeftUpperEye()), p);
         canvas.drawPath(Paths.toCatmullRomCurve(face.getRightUpperEye()), p);
+
 
         p.setColor(mLowColor);
         p.setStrokeJoin(Paint.Join.ROUND);
