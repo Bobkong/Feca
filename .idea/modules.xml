@@ -3,10 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Feca.iml" filepath="$PROJECT_DIR$/Feca.iml" />
-      <module fileurl="file://C:\Users\Bob\Feca-c552fb249ff5d94b99bb92587609cabb7407f1a6\Feca-c552fb249ff5d94b99bb92587609cabb7407f1a6\Feca.iml" filepath="C:\Users\Bob\Feca-c552fb249ff5d94b99bb92587609cabb7407f1a6\Feca-c552fb249ff5d94b99bb92587609cabb7407f1a6\Feca.iml" />
-      <module fileurl="file://C:\Users\Bob\Feca-c552fb249ff5d94b99bb92587609cabb7407f1a6\Feca-c552fb249ff5d94b99bb92587609cabb7407f1a6\Feca-master.iml" filepath="C:\Users\Bob\Feca-c552fb249ff5d94b99bb92587609cabb7407f1a6\Feca-c552fb249ff5d94b99bb92587609cabb7407f1a6\Feca-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Bob\Feca-c552fb249ff5d94b99bb92587609cabb7407f1a6\Feca-c552fb249ff5d94b99bb92587609cabb7407f1a6\app\app.iml" filepath="C:\Users\Bob\Feca-c552fb249ff5d94b99bb92587609cabb7407f1a6\Feca-c552fb249ff5d94b99bb92587609cabb7407f1a6\app\app.iml" />
     </modules>
   </component>
 </project>

@@ -1,6 +1,7 @@
 package com.feca.mface.ui.makeup;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -55,6 +56,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by Bob on 2017/9/10.
  */
+@SuppressLint("CheckResult")
 @EActivity(R.layout.activity_makeup)
 public class MakeupActivity extends AppCompatActivity {
 
@@ -88,6 +90,7 @@ public class MakeupActivity extends AppCompatActivity {
             new ReadOnlyAdapter<>(MakeupModeModel.modes(), MakeupModeViewHolder.class);
     private FacesMakeup mFacesMakeup;
 
+    @SuppressLint("CheckResult")
     private void initFaceMakeup() {
         Uri uri = getIntent().getData();
         if (uri == null)
@@ -96,14 +99,14 @@ public class MakeupActivity extends AppCompatActivity {
         Observable<DetectedFaces> detectedFacesObservable =
                 bitmapObservable.flatMap(new Function<Bitmap, ObservableSource<DetectedFaces>>() {
                     @Override
-                    public ObservableSource<DetectedFaces> apply(@NonNull Bitmap bitmap) throws Exception{
+                    public ObservableSource<DetectedFaces> apply(@NonNull Bitmap bitmap) throws Exception {
                         return FaceDetectService.getInstance().detect(bitmap);
 
                     }
                 });
         Observable.zip(bitmapObservable, detectedFacesObservable, new BiFunction<Bitmap, DetectedFaces, FacesMakeup>() {
             @Override
-            public FacesMakeup apply(@NonNull Bitmap bitmap, @NonNull DetectedFaces faces){
+            public FacesMakeup apply(@NonNull Bitmap bitmap, @NonNull DetectedFaces faces) {
                 return new FacesMakeup(bitmap, faces);
             }
         })
@@ -133,17 +136,17 @@ public class MakeupActivity extends AppCompatActivity {
         mLipstickColorAdapter = new ReadOnlyAdapter<>(LipstickModel.lipsticks(this)
                 , LipstickViewHolder.class);
         mEyeColorAdapter = new ReadOnlyAdapter<>(EyeModel.eyesticks(this)
-                ,EyeViewHolder.class);
+                , EyeViewHolder.class);
         mBottomList.addOnItemTouchListener(new OnRecyclerViewItemClickListener(this) {
             @Override
             public void onItemClick(View view, int position) {
                 RecyclerView.ViewHolder holder = mBottomList.getChildViewHolder(view);
                 if (holder instanceof MakeupModeViewHolder) {
                     onMakeupModeSelected((MakeupModeViewHolder) holder, position);
-                } else if (holder instanceof LipstickViewHolder){
+                } else if (holder instanceof LipstickViewHolder) {
                     onLipstickColorSelected((LipstickViewHolder) holder, position);
                     which_lipstick = position;
-                }else if (holder instanceof EyeViewHolder){
+                } else if (holder instanceof EyeViewHolder) {
                     onEyeColorSelected((EyeViewHolder) holder, position);
                 }
             }
@@ -163,19 +166,19 @@ public class MakeupActivity extends AppCompatActivity {
         mSelectedEyeHolder = holder;
         mSelectedEyeHolder.mEyeColor.setImageResource(R.drawable.ic_done_white_48dp);
         Integer[] eye_colors = new Integer[4];
-        eye_colors[0] = colors.getColor(position*4,0);
-        eye_colors[1] = colors.getColor(position*4 + 1,0);
-        eye_colors[2] = colors.getColor(position*4 + 2,0);
-        eye_colors[3] = colors.getColor(position*4 + 3,0);
+        eye_colors[0] = colors.getColor(position * 4, 0);
+        eye_colors[1] = colors.getColor(position * 4 + 1, 0);
+        eye_colors[2] = colors.getColor(position * 4 + 2, 0);
+        eye_colors[3] = colors.getColor(position * 4 + 3, 0);
         Observable.just(eye_colors)
                 .map(new Function<Integer[], Bitmap>() {
                     @Override
                     public Bitmap apply(@NonNull Integer[] color) throws Exception {
                         if (which_lipstick == 8)
                             mFacesMakeup.reset();
-                        mFacesMakeup.makeup(new Eyestick(color[2],color[3]));
-                        mFacesMakeup.makeup(new Eyestick(color[1],color[3]));
-                        mFacesMakeup.makeup(new Eyestick(color[0],color[3]));
+                        mFacesMakeup.makeup(new Eyestick(color[2], color[3]));
+                        mFacesMakeup.makeup(new Eyestick(color[1], color[3]));
+                        mFacesMakeup.makeup(new Eyestick(color[0], color[3]));
                         which_lipstick = 8;
                         return mFacesMakeup.getMadeUpFace();
                     }
@@ -211,7 +214,7 @@ public class MakeupActivity extends AppCompatActivity {
                 .map(new Function<Integer, Bitmap>() {
                     @Override
                     public Bitmap apply(@NonNull Integer color) throws Exception {
-                        if (which_lipstick >= 0 && which_lipstick <=7)
+                        if (which_lipstick >= 0 && which_lipstick <= 7)
                             mFacesMakeup.reset();
                         mFacesMakeup.makeup(new Lipstick(color));
                         return mFacesMakeup.getMadeUpFace();
@@ -229,23 +232,26 @@ public class MakeupActivity extends AppCompatActivity {
     }
 
     private void onMakeupModeSelected(MakeupModeViewHolder holder, int position) {
-
-        if (position == 0){
+        if(mFacesMakeup == null){
+            Toast.makeText(this, R.string.wait_for_detection, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(!mFacesMakeup.isFaceDetected()){
+            Toast.makeText(this, R.string.no_face_detected, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (position == 0) {
             mBottomList.setAdapter(mLipstickColorAdapter);
             mBottomBar.setVisibility(View.VISIBLE);
             mMakeupMode.setText(holder.mModeName.getText());
-        }
-        else if(position == 1){
+        } else if (position == 1) {
             mBottomList.setAdapter(mEyeColorAdapter);
             mBottomBar.setVisibility(View.VISIBLE);
             mMakeupMode.setText(holder.mModeName.getText());
-        }
-
-        else{
+        } else {
             Toast.makeText(this, R.string.developing, Toast.LENGTH_SHORT).show();
             return;
         }
-
     }
 
     void savePhoto() {
@@ -300,7 +306,7 @@ public class MakeupActivity extends AppCompatActivity {
 
     void buy() {
         Uri uri;
-        switch (which_lipstick){
+        switch (which_lipstick) {
             case -1:
                 uri = Uri.parse("https://list.tmall.com/search_product.htm?q=%E5%8F%A3%E7%BA%A2&type=p&vmarket=&spm=875.7931836%2FB.a2227oh.d100&from=mallfp..pc_1_searchbutton");
                 break;
