@@ -1,2 +1,0 @@
-# Feca
-google competition
