@@ -1,2 +1,2 @@
 # Feca
-google competition
+An virtual makeup Android application
